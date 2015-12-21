@@ -25,6 +25,7 @@
     var width = 256;
     var height = 256;
     var img = new Image();
+    img.crossOrigin = "Anonymous";
     img.src = inputImg.src;
     var canvas = document.getElementById('canvas');
     canvas.width = width;
