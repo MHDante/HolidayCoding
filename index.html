@@ -17,11 +17,8 @@
   <script type="text/javascript" src="js/ipp/liam.js"></script>
   <script type="text/javascript" src="js/ipp/matthew.js"></script>
   <script type="text/javascript" src="js/ipp/zack.js"></script>
-<<<<<<< Updated upstream
   <script type="text/javascript" src="js/ipp/utils.js"></script>
-=======
   <script type="text/javascript" src="js/ipp/alden.js"></script>
->>>>>>> Stashed changes
   <script type="text/javascript">
 
     var inputImg = document.getElementById("input-img");
@@ -41,7 +38,6 @@
       var myImageData = ctx.getImageData(0,0,canvas.width, canvas.height);
       var data = myImageData.data;
       for (var i = 0; i < data.length; i += 4) {
-<<<<<<< Updated upstream
         data[i]     = Random(255);     // red
         data[i + 1] = Random(255); // green
         data[i + 2] = Random(255); // blue
@@ -52,7 +48,6 @@
       fns = ShuffleArray(array);
       for(var f in fns){
         myImageData = f(myImageData);
-=======
         data[i]     = Math.random()*255; // red
         data[i + 1] = Math.random()*255;   // green
         data[i + 2] = Math.random()*255;   // blue
@@ -65,7 +60,6 @@
       draw(aldenData);
       function draw(imageData) {
           ctx.putImageData(imageData, 0, 0);
->>>>>>> Stashed changes
       }
       ctx.putImageData(myImageData, 0, 0);
     };
