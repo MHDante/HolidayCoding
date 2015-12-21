@@ -10,8 +10,6 @@ var zack = function(imageData) {
   }
   return imageData;
 };
-var width = 256;
-var height = 256;
 var zack2 = function(imageData) {
   var data = imageData.data;
   var t = imageData.t;

@@ -1,3 +1,5 @@
+var width = 256;
+var height = 256;
 var Random = function(x){
   return Math.floor((Math.random() * x) + 1);
 }
