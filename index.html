@@ -4,7 +4,7 @@
   </style>
   <body>
       <h4>INPUT</h4>
-      <img id="input-img" src="colorpicker.gif" alt="" />
+      <img id="input-img" src="input.png" alt="" />
       <h4>OUTPUT</h4>
       <canvas id="canvas" width="256" height="256"></canvas>
   </body>
@@ -23,22 +23,24 @@
     canvas.height = height;
     var ctx = canvas.getContext('2d');
     var myImageData = ctx.createImageData(width, height);
-    /*img.onload = function() {
+    img.onload = function() {
 
       var data = myImageData.data;
       for (var i = 0; i < data.length; i += 4) {
-        data[i]     = Random(255);     // red
-        data[i + 1] = Random(255); // green
-        data[i + 2] = Random(255); // blue
+        data[i]     = 255;     // red
+        data[i + 1] = 0; // green
+        data[i + 2] = 0; // blue
         data[i + 3] = 255;
       }
-    };*/
 
-    var zackData = zack(myImageData);
-    draw(zackData);
-    function draw(imageData) {
-        ctx.putImageData(imageData, 0, 0);
-    }
+      var zackData = zack(myImageData);
+      draw(zackData);
+      function draw(imageData) {
+          ctx.putImageData(imageData, 0, 0);
+      }
+    };
+
+
   </script>
 
 </html>
