@@ -1,4 +1,4 @@
-var matthew = function(imageData) {
+var david = function(imageData) {
   var data = imageData.data;
   var f = function(ii) {
     return ii };
