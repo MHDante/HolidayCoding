@@ -2,9 +2,6 @@ var inputImg = document.getElementById("input-img");
 
 var img = new Image();
 img.src = inputImg.src;
-img.onload = function() {
-	draw(this);
-};
 
 var canvas = document.getElementById('canvas');
 canvas.width = width;
@@ -17,9 +14,7 @@ var step = 50;
 var fns = [alden, dante, david, liam, matthew, zack2];
 fns = ShuffleArray(fns);
 
-var loop = function() {
-
-function draw(img) {
+var draw = function(img) {
 	ctx.drawImage(img, 0, 0);
 	var myImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 	myImageData.t = time;
@@ -30,5 +25,11 @@ function draw(img) {
 	}
 	ctx.putImageData(myImageData, 0, 0);
 
-	setTimeout(loop, time);
+	setTimeout(function() {
+		draw(img);
+	}, time);
+};
+
+img.onload = function() {
+	draw(this);
 }
