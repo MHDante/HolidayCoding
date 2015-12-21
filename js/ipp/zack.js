@@ -14,6 +14,7 @@ var width = 256;
 var height = 256;
 var zack2 = function(imageData) {
   var data = imageData.data;
+  var t = imageData.t;
   var f = function(ii, div) {
     return 0.5 * Math.sin(ii / div) + 0.5;
   };
