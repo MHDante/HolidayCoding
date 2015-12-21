@@ -17,7 +17,6 @@ var functionMap = {
 	'zack': { func: zack2, checked: false },
 };
 var checkedFuncs = 0;
-//var fns = [alden, dante, david, liam, matthew, zack2];
 var fns = [];
 for(var name in functionMap) {
 	fns.push(functionMap[name].func);
@@ -49,52 +48,51 @@ var draw = function(img) {
 	}, time);
 };
 
+function funcMap(funcName) {
+	return function() {
+		var prevChecked = functionMap[funcName].checked;
+			if (this.checked) {
+				checkedFuncs += 1;
+			} else {
+				checkedFuncs -= 1;
+			}
+			functionMap[funcName].checked = this.checked;
+	};
+}
+
 function tableCreate() {
-    var body = document.getElementsByTagName('body')[0];
-    var tbl = document.createElement('table');
-    tbl.style.width = '120px';
-    tbl.setAttribute('border', '1');
-    var tbdy = document.createElement('tbody');
-		var keys = Object.keys(functionMap);
-    for (var i = 0; i < keys.length; i++) {
-        var tr = document.createElement('tr');
-        for (var j = 0; j < 2; j++) {
-              var td = document.createElement('td');
-							var key = keys[i];
-							if (j == 0) {
-              	td.appendChild(document.createTextNode(key));
-							} else if (j == 1) {
-								var checkbox = document.createElement('input');
-								checkbox.type = "checkbox";
-								checkbox.name = "name";
-								checkbox.value = "value";
-								checkbox.id = "checkbox-id";
-								td.appendChild(checkbox);
-								checkbox.onclick = (function(funcName) {
-									return function() {
-										var prevChecked = functionMap[funcName].checked;
-										//if (prevChecked !== this.checked) {
-											if (this.checked) {
-												checkedFuncs += 1;
-											} else {
-												checkedFuncs -= 1;
-											}
-											functionMap[funcName].checked = this.checked;
-										//}
-									}
-								})(key);
-
-
-							}
-              tr.appendChild(td);
-        }
-        tbdy.appendChild(tr);
+  var body = document.getElementsByTagName('body')[0];
+  var tbl = document.createElement('table');
+  tbl.style.width = '120px';
+  tbl.setAttribute('border', '1');
+  var tbdy = document.createElement('tbody');
+	var keys = Object.keys(functionMap);
+  for (var i = 0; i < keys.length; i++) {
+    var tr = document.createElement('tr');
+    for (var j = 0; j < 2; j++) {
+      var td = document.createElement('td');
+			var key = keys[i];
+			if (j === 0) {
+      	td.appendChild(document.createTextNode(key));
+			} else if (j == 1) {
+				var checkbox = document.createElement('input');
+				checkbox.type = "checkbox";
+				checkbox.name = "name";
+				checkbox.value = "value";
+				checkbox.id = "checkbox-id";
+				td.appendChild(checkbox);
+				checkbox.onclick = funcMap(key);
+			}
+      tr.appendChild(td);
     }
-    tbl.appendChild(tbdy);
-    body.appendChild(tbl)
-};
+    tbdy.appendChild(tr);
+  }
+  tbl.appendChild(tbdy);
+  body.appendChild(tbl);
+}
+
 tableCreate();
 
 img.onload = function() {
 	draw(this);
-}
+};

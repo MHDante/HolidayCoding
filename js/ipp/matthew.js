@@ -1,7 +1,8 @@
 var matthew = function(imageData) {
   var data = imageData.data;
-  var f = function(ii) {
-    return ii };
+  var f = function(data) {
+    return data;
+  };
 
   for (var i = 0; i < data.length; i += 4) {
     data[i]   = f(data[i]);   // red
