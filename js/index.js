@@ -1,9 +1,12 @@
-var inputImg = document.getElementById("input-img");
-var width = 256;
-var height = 256;
+var width = 256, height = 256;
+
+var inputImg = document.getElementById('input-img');
 var img = new Image();
-img.crossOrigin = "Anonymous";
 img.src = inputImg.src;
+img.onload = function() {
+	draw(this);
+};
+
 var canvas = document.getElementById('canvas');
 canvas.width = width;
 canvas.height = height;
@@ -12,29 +15,21 @@ var ctx = canvas.getContext('2d');
 var time = 0;
 var step = 50;
 
-var loop = function() {
+var fns = [zack2, david];
 
+function draw(img) {
 	ctx.drawImage(img, 0, 0);
-	var myImageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+	var myImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 	myImageData.t = time;
 	time += step/1000;
 	var data = myImageData.data;
-	/*for (var i = 0; i < data.length; i += 4) {
-		data[i]     = Random(255); // red
-		data[i + 1] = Random(255); // green
-		data[i + 2] = Random(255); // blue
-		data[i + 3] = 255;
-	}*/
 
-	var fns = [alden, dante, david, liam, matthew, zack2];
 	fns = ShuffleArray(fns);
 
-	var length = fns.length;
-	for (var ii = 0; ii < length; ii++) {
-		myImageData = fns[ii](myImageData);
+	for (var i = 0; i < fns.length; i++) {
+		myImageData = fns[i](myImageData);
 	}
 	ctx.putImageData(myImageData, 0, 0);
 
 	setTimeout(loop, time);
-};
-img.onload = loop;
+}
