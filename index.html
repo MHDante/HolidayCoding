@@ -1,0 +1,44 @@
+<html>
+  <head></head>
+  <style media="screen">
+  </style>
+  <body>
+      <h4>INPUT</h4>
+      <img id="input-img" src="colorpicker.gif" alt="" />
+      <h4>OUTPUT</h4>
+      <canvas id="canvas" width="256" height="256"></canvas>
+  </body>
+  <script type="text/javascript" src="js/ipp/zack.js"></script>
+  <script type="text/javascript">
+    var Random = function(x){
+      return Math.floor((Math.random() * x) + 1);
+    }
+    var inputImg = document.getElementById("input-img");
+    var width = 256;
+    var height = 256;
+    var img = new Image();
+    img.src = inputImg.src;
+    var canvas = document.getElementById('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext('2d');
+    var myImageData = ctx.createImageData(width, height);
+    /*img.onload = function() {
+
+      var data = myImageData.data;
+      for (var i = 0; i < data.length; i += 4) {
+        data[i]     = Random(255);     // red
+        data[i + 1] = Random(255); // green
+        data[i + 2] = Random(255); // blue
+        data[i + 3] = 255;
+      }
+    };*/
+
+    var zackData = zack(myImageData);
+    draw(zackData);
+    function draw(imageData) {
+        ctx.putImageData(imageData, 0, 0);
+    }
+  </script>
+
+</html>
