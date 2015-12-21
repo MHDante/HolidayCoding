@@ -1,8 +1,8 @@
 var inputImg = document.getElementById("input-img");
 
 var img = new Image();
-img.crossOrigin = "Anonymous";
 img.src = inputImg.src;
+
 var canvas = document.getElementById('canvas');
 canvas.width = width;
 canvas.height = height;
@@ -28,10 +28,9 @@ for(var name in functionMap) {
 var shuffled = ShuffleArray(fns);
 var keysArray = new Array(fns.length);
 
-var loop = function() {
-
+var draw = function(img) {
 	ctx.drawImage(img, 0, 0);
-	var myImageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+	var myImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 	myImageData.t = time;
 	time += step/1000;
 
@@ -41,9 +40,10 @@ var loop = function() {
 	}
 	ctx.putImageData(myImageData, 0, 0);
 
-	setTimeout(loop, time);
+	setTimeout(function() {
+		draw(img);
+	}, time);
 };
-img.onload = loop;
 
 function tableCreate() {
     var body = document.getElementsByTagName('body')[0];
@@ -90,3 +90,7 @@ function tableCreate() {
     body.appendChild(tbl)
 };
 tableCreate();
+
+img.onload = function() {
+	draw(this);
+}
