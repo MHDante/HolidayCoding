@@ -1,10 +1,12 @@
 var liam = function(imageData) {
   var data = imageData.data;
   var f = function(data, index) {
-      var x = index % canvas.width;
-      var y = index / canvas.height;
-      var centerX = canvas.width / 2;
-      var centerY = canvas.height / 2 + 400;
+      var w = canvas.width * 4;
+      var h = canvas.height;
+      var x = index % w;
+      var y = index / h;
+      var centerX = w / 2;
+      var centerY = h / 2 + 400;
       var diffX = centerX - x;
       var diffY = centerY - y;
       var dist = Math.sqrt(diffX * diffX + diffY * diffY);
