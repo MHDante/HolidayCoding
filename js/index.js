@@ -31,9 +31,16 @@ var draw = function(img) {
 	myImageData.t = time;
 	time += step/1000;
 
-	var length = shuffled.length;
-	for (var ii = 0; ii < length; ii++) {
-		myImageData = shuffled[ii](myImageData);
+	if (checkedFuncs <= 0) {
+		var length = shuffled.length;
+		for (var ii = 0; ii < length; ii++) {
+			myImageData = shuffled[ii](myImageData);
+		}
+	} else {
+		for(var name in functionMap) {
+			var obj = functionMap[name];
+			if (obj.checked) myImageData = obj.func(myImageData);
+		}
 	}
 	ctx.putImageData(myImageData, 0, 0);
 
@@ -53,8 +60,8 @@ function tableCreate() {
         var tr = document.createElement('tr');
         for (var j = 0; j < 2; j++) {
               var td = document.createElement('td');
+							var key = keys[i];
 							if (j == 0) {
-								var key = keys[i];
               	td.appendChild(document.createTextNode(key));
 							} else if (j == 1) {
 								var checkbox = document.createElement('input');
@@ -63,19 +70,19 @@ function tableCreate() {
 								checkbox.value = "value";
 								checkbox.id = "checkbox-id";
 								td.appendChild(checkbox);
-								td.onclick = (function(funcName) {
+								checkbox.onclick = (function(funcName) {
 									return function() {
 										var prevChecked = functionMap[funcName].checked;
-										if (prevChecked != this.checked) {
+										//if (prevChecked !== this.checked) {
 											if (this.checked) {
 												checkedFuncs += 1;
 											} else {
 												checkedFuncs -= 1;
 											}
 											functionMap[funcName].checked = this.checked;
-										}
+										//}
 									}
-								})();
+								})(key);
 
 
 							}
