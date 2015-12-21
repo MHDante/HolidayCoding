@@ -9,8 +9,9 @@ var liam = function(imageData) {
       var centerY = h / 2 + 400;
       var diffX = centerX - x;
       var diffY = centerY - y;
-      var dist = Math.sqrt(diffX * diffX + diffY * diffY);
-      return data * (Math.sin((dist / 5) + imageData.t * 100) + 1);
+      var distSquared = diffX * diffX + diffY * diffY;
+      var dist = Math.sqrt(distSquared);
+      return data * (Math.sin((dist / 5) + imageData.t * 100) + 1) * (Math.sin((distSquared / 5) + imageData.t * 100) + 1);
   };
 
   for (var i = 0; i < data.length; i += 4) {
