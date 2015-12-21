@@ -8,11 +8,15 @@
       <h4>OUTPUT</h4>
       <canvas id="canvas" width="256" height="256"></canvas>
   </body>
+  <script type="text/javascript" src="js/ipp/alden.js"></script>
+  <script type="text/javascript" src="js/ipp/dante.js"></script>
+  <script type="text/javascript" src="js/ipp/david.js"></script>
+  <script type="text/javascript" src="js/ipp/liam.js"></script>
+  <script type="text/javascript" src="js/ipp/matthew.js"></script>
   <script type="text/javascript" src="js/ipp/zack.js"></script>
+  <script type="text/javascript" src="js/ipp/utils.js"></script>
   <script type="text/javascript">
-    var Random = function(x){
-      return Math.floor((Math.random() * x) + 1);
-    }
+
     var inputImg = document.getElementById("input-img");
     var width = 256;
     var height = 256;
@@ -22,9 +26,12 @@
     canvas.width = width;
     canvas.height = height;
     var ctx = canvas.getContext('2d');
-    var myImageData = ctx.createImageData(width, height);
+
+
     img.onload = function() {
 
+      ctx.drawImage(img, 0, 0);
+      var myImageData = ctx.getImageData(x, y, 1, 1);
       var data = myImageData.data;
       for (var i = 0; i < data.length; i += 4) {
         data[i]     = 255;     // red
@@ -33,11 +40,12 @@
         data[i + 3] = 255;
       }
 
-      var zackData = zack(myImageData);
-      draw(zackData);
-      function draw(imageData) {
-          ctx.putImageData(imageData, 0, 0);
+      var fns = [alden, dante, david, liam, matthew, zack];
+      fns = ShuffleArray(array);
+      for(var f in fns){
+        imageData = f(imageData);
       }
+      ctx.putImageData(zackData, 0, 0);
     };
 
 
