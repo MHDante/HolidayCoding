@@ -4,7 +4,7 @@
   </style>
   <body>
       <h4>INPUT</h4>
-      <img id="input-img" src="input.png" alt="" />
+      <img id="input-img" src="input.png" alt="" crossDomain = "anonymous"/>
       <h4>OUTPUT</h4>
       <canvas id="canvas" width="256" height="256"></canvas>
   </body>
@@ -31,21 +31,21 @@
     img.onload = function() {
 
       ctx.drawImage(img, 0, 0);
-      var myImageData = ctx.getImageData(x, y, 1, 1);
+      var myImageData = ctx.getImageData(0,0,canvas.width, canvas.height);
       var data = myImageData.data;
       for (var i = 0; i < data.length; i += 4) {
-        data[i]     = 255;     // red
-        data[i + 1] = 0; // green
-        data[i + 2] = 0; // blue
+        data[i]     = Random(255);     // red
+        data[i + 1] = Random(255); // green
+        data[i + 2] = Random(255); // blue
         data[i + 3] = 255;
       }
 
-      var fns = [alden, dante, david, liam, matthew, zack];
+      var fns = [alden, dante, david, liam, matthew, zack2];
       fns = ShuffleArray(array);
       for(var f in fns){
-        imageData = f(imageData);
+        myImageData = f(myImageData);
       }
-      ctx.putImageData(zackData, 0, 0);
+      ctx.putImageData(myImageData, 0, 0);
     };
 
 
