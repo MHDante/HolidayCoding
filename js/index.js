@@ -4,10 +4,7 @@ var img = new Image();
 img.src = inputImg.src;
 
 var canvas = document.getElementById('canvas');
-canvas.width = width;
-canvas.height = height;
 var ctx = canvas.getContext('2d');
-
 var time = 0;
 var step = 50;
 
